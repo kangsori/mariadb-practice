@@ -65,13 +65,14 @@ where b.to_date='9999-01-01'
 order by 급여 desc;
 
 -- 문제8.
--- 현재 급여가 50000이 넘는 직책을 직책, 급여로 급여가 큰 순서대로 출력하시오
-select a.title as '직책', b.salary as '급여'
+-- 현재 평균급여가 50000이 넘는 직책을 직책, 급여로 급여가 큰 순서대로 출력하시오
+select a.title as '직책', avg(b.salary) as '급여'
 from titles a
 inner join salaries b on a.emp_no=b.emp_no
 where a.to_date='9999-01-01'
   and b.to_date='9999-01-01'
-  and b.salary > 50000
+group by a.title
+having avg(b.salary) > 50000
 order by 급여 desc;
 
 -- 문제9.
