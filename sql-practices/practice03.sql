@@ -23,13 +23,15 @@ where b.to_date='9999-01-01';
 
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
-select a.emp_no as '사번', a.first_name as '이름', ifnull(d.title,'없음') as '직책',ifnull(c.dept_name,'없음') as '부서'
+select a.emp_no as '사번', a.first_name as '이름', ifnull(e.salary,0) as '연봉', ifnull(d.title,'없음') as '직책',ifnull(c.dept_name,'없음') as '부서'
 from employees a
 left join dept_emp b on a.emp_no=b.emp_no
 left join departments c on b.dept_no=c.dept_no
 left join titles d on a.emp_no=d.emp_no
+left join salaries e on a.emp_no=e.emp_no
 where b.to_date='9999-01-01'
-  and d.to_date='9999-01-01';
+  and d.to_date='9999-01-01'
+  and e.to_date='9999-01-01';
 
 -- 문제5.
 -- ‘Technique Leader’의 직책으로 과거에 근무한 적이 있는 모든 사원의 사번과 이름을 출력하세요. (현재 ‘Technique Leader’의 직책(으로 근무하는 사원은 고려하지 않습니다.) 이름은 first_name과 last_name을 합쳐 출력 합니다.
