@@ -75,8 +75,6 @@ group by a.title
 having avg(b.salary) > 50000
 order by 급여 desc;
 
-
-
 -- 문제9.
 -- 현재, 부서별 평균 연봉을 연봉이 큰 부서 순서대로 출력하세요.
 select c.dept_name as '부서', avg(b.salary) as '연봉'
