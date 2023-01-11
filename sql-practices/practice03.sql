@@ -19,13 +19,20 @@ select a.emp_no as '사번', a.first_name as '이름', ifnull(c.dept_name,'없�
 from employees a
 left join dept_emp b on a.emp_no=b.emp_no
 left join departments c on b.dept_no=c.dept_no
-where b.to_date='9999-01-01';
+where b.to_date='9999-01-01'
+order by 이름,사번;
+
+select a.emp_no 사번, a.first_name 이름,c.dept_name '현재 부서'
+from employees a join dept_emp b join departments c
+on a.emp_no = b.emp_no and b.dept_no = c.dept_no
+where b.to_date >= sysdate()
+order by 이름,사번;
 
 -- 문제4.
 -- 전체 사원의 사번, 이름, 연봉, 직책, 부서를 모두 이름 순서로 출력합니다.
 select a.emp_no as '사번', a.first_name as '이름', ifnull(e.salary,0) as '연봉', ifnull(d.title,'없음') as '직책',ifnull(c.dept_name,'없음') as '부서'
 from employees a
-left join dept_emp b on a.emp_no=b.emp_no
+left join dept_emp b on a.emp_no=b.emp_no 
 left join departments c on b.dept_no=c.dept_no
 left join titles d on a.emp_no=d.emp_no
 left join salaries e on a.emp_no=e.emp_no
@@ -95,3 +102,5 @@ where a.to_date='9999-01-01'
   and b.to_date='9999-01-01'
 group by a.title
 order by 연봉 desc;
+
+
