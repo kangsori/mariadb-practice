@@ -77,6 +77,18 @@ limit 0,1;
 -- 문제8.
 -- 현재 자신의 매니저보다 높은 연봉을 받고 있는 직원은?
 -- 부서이름, 사원이름, 연봉, 매니저 이름, 메니저 연봉 순으로 출력합니다.
+-- 1)
+select d.dept_name as '부서',a.first_name as '이름', b.salary as '급여', g.first_name as '매니저', f.salary as '매니저급여'
+from employees a
+inner join salaries b on a.emp_no=b.emp_no and b.to_date='9999-01-01'
+inner join dept_emp c on a.emp_no=c.emp_no and c.to_date='9999-01-01'
+inner join departments d on c.dept_no=d.dept_no
+inner join dept_manager e on c.dept_no=e.dept_no and e.to_date='9999-01-01'
+inner join salaries f on e.emp_no=f.emp_no and f.to_date='9999-01-01'
+inner join employees g on g.emp_no=f.emp_no 
+where  b.salary > f.salary ;
+
+-- 2)
 select d.dept_name as '부서',a.first_name as '이름', b.salary as '급여', f.first_name as '매니저', e.salary as '매니저급여'
 from employees a
 inner join salaries b on a.emp_no=b.emp_no and b.to_date='9999-01-01'
