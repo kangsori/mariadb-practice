@@ -32,9 +32,7 @@ select a.emp_no as '사번', a.first_name as '이름', e.first_name as '매니�
 from employees a
 inner join dept_emp b on a.emp_no=b.emp_no and b.to_date='9999-01-01'
 inner join departments c on b.dept_no=c.dept_no
-inner join ( select dept_no, emp_no
-               from dept_manager
-              where to_date='9999-01-01' ) d on b.dept_no=d.dept_no
+inner join dept_manager d on b.dept_no=d.dept_no and d.to_date='9999-01-01'
 inner join employees e on d.emp_no=e.emp_no;
 
 -- 문제5.
