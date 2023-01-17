@@ -8,8 +8,8 @@ import bookmall.vo.BookVo;
 public class bookDaoTest {
 
 	public static void main(String[] args) {
-		//testInsert();
-		//testFindAll();
+		testInsert();
+		testFindAll();
 
 	}
 

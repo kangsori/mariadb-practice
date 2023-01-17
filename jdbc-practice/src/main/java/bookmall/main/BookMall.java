@@ -7,6 +7,11 @@ import bookmall.dao.CartDao;
 import bookmall.dao.CategoryDao;
 import bookmall.dao.OrdersDao;
 import bookmall.dao.UserDao;
+import bookmall.dao.test.bookDaoTest;
+import bookmall.dao.test.cartDaoTest;
+import bookmall.dao.test.categoryDaoTest;
+import bookmall.dao.test.ordersDaoTest;
+import bookmall.dao.test.userDaoTest;
 import bookmall.vo.BookVo;
 import bookmall.vo.CartVo;
 import bookmall.vo.CategoryVo;
@@ -17,27 +22,27 @@ public class BookMall {
 
 	public static void main(String[] args) {
 		//회원 리스트 출력
-		//userDaoTest.testInsert();
+		userDaoTest.testInsert();
 		System.out.println("==========회원리스트==========");
 		findAllUser();
 		
 		//카테고리 리스트 출력
-		//categoryDaoTest.testInsert();
+		categoryDaoTest.testInsert();
 		System.out.println("===========카테고리===========");
 		findAllCategory();
 
 		//상품 리스트 출력
-		//bookDaoTest.testInsert();
+		bookDaoTest.testInsert();
 		System.out.println("============상품============");
 		findAllBook();
 		
 		//카트 리스트 출력
-		//cartDaoTest.testInsert();
+		cartDaoTest.testInsert();
 		System.out.println("==========카트리스트==========");
 		findAllCart();
 		
-		//카트 리스트 출력
-	    //ordersDaoTest.testInsert();
+		//주문 리스트 출력
+	    ordersDaoTest.testInsert();
 		System.out.println("==========주문리스트==========");
 		findAllOrders();
  
@@ -74,7 +79,7 @@ public class BookMall {
 		for(CartVo vo:list) {
 			System.out.println("["+vo.getNo()+"] 책제목:"+vo.getBookName()+", "
                     						 + "수량:"+vo.getQuantity()+", "
-                    						 + "가격:"+vo.getPrice()+", "
+                    						 + "가격:"+vo.getPrice()+" "
                     						 + "-"+vo.getUserName());
 		}
 	}
@@ -82,11 +87,13 @@ public class BookMall {
 	private static void findAllOrders() {
 		List<OrdersVo> list=new OrdersDao().fildAll();
 		for(OrdersVo vo:list) {
-			System.out.println("["+vo.getOrderNo()+"] - 총 금액 :"+vo.getTotalPrice() +"\n"
-					            +"주문자:"+vo.getName()+"("+(vo.getMember().equals("Y")?"회원":"비회원")+")/"+vo.getEmail()+"\n"
-					            + "배송지:"+vo.getAddress()+" \n"
-					            + "책번호: "+vo.getBookNo()+" - "+vo.getBookName()+"\n"
-                    			+ "수량:"+vo.getQuantity());
+			System.out.println("["+vo.getOrderNo()+"] - 총 결제금액 :"+vo.getTotalPrice() +"\n"
+					            +"주문자:"+vo.getName()+"("+vo.getEmail()+")\n"
+					            + "배송지:"+vo.getAddress());
+			List<CartVo> item =new OrdersDao().fildAllItem(vo.getNo());
+			for(CartVo cvo:item) {
+				System.out.println("-----책이름 :"+cvo.getBookName()+"/ 수량 :"+cvo.getQuantity());
+			}
 		}
 	}
 

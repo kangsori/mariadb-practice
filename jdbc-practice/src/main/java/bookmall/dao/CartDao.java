@@ -7,8 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import bookmall.vo.BookVo;
 import bookmall.vo.CartVo;
 
 public class CartDao {
@@ -23,7 +21,7 @@ public class CartDao {
 			conn = getConnection();
 				
 			String sql =
-				"  select a.no, a.quantity, a.book_no, a.user_no, b.name, c.name"
+				"  select a.no, a.quantity, a.book_no, a.user_no, b.name, c.name,b.price"
 				+ " from cart a "
 			    + " inner join book b on a.book_no=b.no "
 			    + " inner join user c on a.user_no=c.no ";
@@ -40,6 +38,7 @@ public class CartDao {
 				vo.setUserNo(rs.getLong(4));
 				vo.setBookName(rs.getString(5));
 				vo.setUserName(rs.getString(6));
+				vo.setPrice(rs.getInt(7));
 				
 				result.add(vo);
 			}

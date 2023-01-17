@@ -8,7 +8,7 @@ import bookmall.vo.CartVo;
 public class cartDaoTest {
 
 	public static void main(String[] args) {
-		//testInsert();
+		testInsert();
 		testFindAll();
 
 	}
@@ -35,12 +35,6 @@ public class cartDaoTest {
 		vo.setBookNo(2L);
 		vo.setUserNo(1L);
 		vo.setQuantity(2);
-		dao.Insert(vo);
-		
-		vo = new CartVo();
-		vo.setBookNo(3L);
-		vo.setUserNo(2L);
-		vo.setQuantity(5);
 		dao.Insert(vo);
 		
 	}
