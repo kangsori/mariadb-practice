@@ -9,3 +9,16 @@ delete from emaillist where email='dooly@gmail.com';
 select no,first_name,last_name, email 
 from emaillist 
 order by no desc;
+
+show tables;
+
+select * from member;
+
+desc member;
+select * from emaillist; 
+
+select * from guestbook;
+
+desc guestbook;
+
+select now();
